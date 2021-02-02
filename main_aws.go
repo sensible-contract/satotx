@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"satotx/controller"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -16,8 +17,9 @@ func init() {
 	log.Println("Gin cold start")
 	router := gin.Default()
 
-	router.POST("/utxo/:txid/:index", SigUtxo)
-	router.POST("/utxo-spend-by/:txid/:index/:byTxid", SigUtxoBy)
+	router.GET("/", controller.Satotx)
+	router.POST("/utxo/:txid/:index", controller.SignUtxo)
+	router.POST("/utxo-spend-by/:txid/:index/:byTxid", controller.SignUtxoSpendBy)
 
 	ginLambda = ginadapter.New(router)
 }

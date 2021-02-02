@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"satotx/controller"
 	"syscall"
 	"time"
 
@@ -20,8 +21,9 @@ var (
 func main() {
 	router := gin.Default()
 
-	router.POST("/utxo/:txid/:index", SigUtxo)
-	router.POST("/utxo-spend-by/:txid/:index/:byTxid", SigUtxoBy)
+	router.GET("/", controller.Satotx)
+	router.POST("/utxo/:txid/:index", controller.SignUtxo)
+	router.POST("/utxo-spend-by/:txid/:index/:byTxid", controller.SignUtxoSpendBy)
 
 	log.Printf("LISTEN: %s", listen_address)
 	svr := &http.Server{
