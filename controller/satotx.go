@@ -16,6 +16,7 @@ func Satotx(ctx *gin.Context) {
 		Code: 0,
 		Msg:  "Welcome to use sensible contract on Bitcoin SV!",
 		Data: &model.Welcome{
+			PubKey:  rb.PubKeyHex,
 			Contact: "",
 			Job:     "",
 			Github:  "https://github.com/sensible-group",

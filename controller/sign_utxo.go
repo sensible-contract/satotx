@@ -87,7 +87,6 @@ func SignUtxo(ctx *gin.Context) {
 		Code: 0,
 		Msg:  "ok",
 		Data: &model.TxResponse{
-			PubKey:  rb.PubKeyHex,
 			TxId:    txIdHex,
 			Index:   txIndex,
 			ByTxId:  "",

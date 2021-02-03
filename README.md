@@ -5,7 +5,37 @@
 
 我们部署了一个签名器 [https://api.satotx.com](https://api.satotx.com) ，可暂做测试，获取utxo的签名。支持的API如下：
 
-### 一、 对“某UTXO”签名
+### 0. Welcome
+
+可获知签名公钥等信息。
+
+#### Request
+- Method: **GET**
+- URL:  ```/```
+
+#### Response
+
+data包括字段为：
+
+- pubKey: rabin签名的公钥，hex编码
+- contact: 联系方式
+- github: 项目地址
+
+- Body
+```
+{
+  code: 0,
+  msg: "Welcome to use sensible contract on Bitcoin SV!",
+  data: {
+    "pubKey": "25108ec89eb96b99314619eb5b124f11f00307a833cda48f5ab1865a04d4cfa567095ea4dd47cdf5c7568cd8efa77805197a67943fe965b0a558216011c374aa06a7527b20b0ce9471e399fa752e8c8b72a12527768a9fc7092f1a7057c1a1514b59df4d154df0d5994ff3b386a04d819474efbd99fb10681db58b1bd857f6d5",
+    "contact": "",
+    "job": "",
+    "github": "https://github.com/sensible-group"
+  }
+}
+```
+
+### 1. 对“某UTXO”签名
 
 
 URL中需要的参数为：
@@ -20,9 +50,9 @@ Body中需要的json参数为：
 
 #### Request
 - Method: **POST**
-- URL:  ```/utxo/{txid}/{index}```
-    - 签名:  ```/utxo/4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b/0```
 - Headers：`Content-Type: application/json`
+- URL:  ```/utxo/{txid}/{index}```
+  - 示例:  ```/utxo/4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b/0```
 - Body:
 ```
 {
@@ -36,7 +66,6 @@ Body中需要的json参数为：
 
 data包括字段为：
 
-- pubKey: rabin签名的公钥，hex编码
 - txId: 同输入参数
 - index: 同输入参数
 - byTxId: 空
@@ -56,7 +85,6 @@ txid在payload中为原始字节序, index是小端4字节，value是小端8字�
   "code": 0,
   "msg": "ok",
   "data": {
-    "pubKey": "25108ec89eb96b99314619eb5b124f11f00307a833cda48f5ab1865a04d4cfa567095ea4dd47cdf5c7568cd8efa77805197a67943fe965b0a558216011c374aa06a7527b20b0ce9471e399fa752e8c8b72a12527768a9fc7092f1a7057c1a1514b59df4d154df0d5994ff3b386a04d819474efbd99fb10681db58b1bd857f6d5",
     "txId": "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b",
     "index": 0,
     "byTxId": "",
@@ -68,7 +96,7 @@ txid在payload中为原始字节序, index是小端4字节，value是小端8字�
 ```
 
 
-### 二、对“某UTXO被下一个Tx花费”签名
+### 2. 对“某UTXO被下一个Tx花费”签名
 
 URL中需要的参数为：
 
@@ -82,9 +110,9 @@ Body中需要的json参数为：
 
 #### Request
 - Method: **POST**
-- URL:  ```/utxo-spend-by/{txid}/{index}/{byTxid}```
-    - 签名:  ```/utxo-spend-by/0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9/0/f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16```
 - Headers：`Content-Type: application/json`
+- URL:  ```/utxo-spend-by/{txid}/{index}/{byTxid}```
+    - 示例:  ```/utxo-spend-by/0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9/0/f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16```
 - Body:
 ```
 {
@@ -99,7 +127,6 @@ Body中需要的json参数为：
 
 data包括字段为：
 
-- pubKey: rabin签名的公钥，hex编码
 - txId: 同输入参数
 - index: 同输入参数
 - byTxId: 同输入参数
@@ -119,7 +146,6 @@ txid在payload中为原始字节序, index是小端4字节，value是小端8字�
   "code": 0,
   "msg": "ok",
   "data": {
-    "pubKey": "25108ec89eb96b99314619eb5b124f11f00307a833cda48f5ab1865a04d4cfa567095ea4dd47cdf5c7568cd8efa77805197a67943fe965b0a558216011c374aa06a7527b20b0ce9471e399fa752e8c8b72a12527768a9fc7092f1a7057c1a1514b59df4d154df0d5994ff3b386a04d819474efbd99fb10681db58b1bd857f6d5",
     "txId": "0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9",
     "index": 0,
     "byTxId": "f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16",

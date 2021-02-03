@@ -8,7 +8,6 @@ type TxRequest struct {
 }
 
 type TxResponse struct {
-	PubKey  string `json:"pubKey"`
 	TxId    string `json:"txId"`
 	Index   int    `json:"index"`
 	ByTxId  string `json:"byTxId"`
@@ -29,6 +28,7 @@ func (t *Response) MarshalJSON() ([]byte, error) {
 
 ////////////////
 type Welcome struct {
+	PubKey  string `json:"pubKey"`
 	Contact string `json:"contact"`
 	Job     string `json:"job"`
 	Github  string `json:"github"`
