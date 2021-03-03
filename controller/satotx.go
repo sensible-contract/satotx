@@ -14,12 +14,12 @@ func Satotx(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, model.Response{
 		Code: 0,
-		Msg:  "Welcome to use sensible contract on Bitcoin SV!",
+		Msg:  "Welcome to use sensing contract on Bitcoin SV!",
 		Data: &model.Welcome{
 			PubKey:  rb.PubKeyHex,
 			Contact: "",
 			Job:     "",
-			Github:  "https://github.com/sensible-group",
+			Github:  "https://github.com/sensing-contract",
 		},
 	})
 }

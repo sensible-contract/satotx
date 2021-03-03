@@ -14,6 +14,7 @@ type TxResponse struct {
 	Sig     string `json:"sigBE"`
 	Padding string `json:"padding"`
 	Payload string `json:"payload"`
+	Script  string `json:"script"`
 }
 
 type Response struct {

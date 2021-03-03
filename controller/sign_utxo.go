@@ -53,7 +53,7 @@ func SignUtxo(ctx *gin.Context) {
 		return
 	}
 
-	txObjHash := blkparser.GetShaString(txRaw)
+	txObjHash := blkparser.GetHash256(txRaw)
 	if !bytes.Equal(txObjHash, txId) {
 		log.Printf("txId(%s) not match hash(txBody)(%s)", hex.EncodeToString(txId), hex.EncodeToString(txObjHash))
 		ctx.JSON(http.StatusOK, model.Response{Code: -1, Msg: "txId not match txBody"})
@@ -78,7 +78,7 @@ func SignUtxo(ctx *gin.Context) {
 		txId,
 		txIndexRaw,
 		txObj.TxOuts[txIndex].ValueRaw,
-		txObj.TxOuts[txIndex].Pkscript,
+		blkparser.GetHash160(txObj.TxOuts[txIndex].Pkscript),
 	}, []byte{})
 
 	sig, padding := rb.Sign(payloadMsg)
@@ -93,5 +93,6 @@ func SignUtxo(ctx *gin.Context) {
 			Sig:     hex.EncodeToString(sig),
 			Padding: hex.EncodeToString(padding),
 			Payload: hex.EncodeToString(payloadMsg),
+			Script:  hex.EncodeToString(txObj.TxOuts[txIndex].Pkscript),
 		}})
 }

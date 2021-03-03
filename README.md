@@ -25,12 +25,12 @@ data包括字段为：
 ```
 {
   code: 0,
-  msg: "Welcome to use sensible contract on Bitcoin SV!",
+  msg: "Welcome to use sensing contract on Bitcoin SV!",
   data: {
     "pubKey": "25108ec89eb96b99314619eb5b124f11f00307a833cda48f5ab1865a04d4cfa567095ea4dd47cdf5c7568cd8efa77805197a67943fe965b0a558216011c374aa06a7527b20b0ce9471e399fa752e8c8b72a12527768a9fc7092f1a7057c1a1514b59df4d154df0d5994ff3b386a04d819474efbd99fb10681db58b1bd857f6d5",
     "contact": "",
     "job": "",
-    "github": "https://github.com/sensible-group"
+    "github": "https://github.com/sensing-contract"
   }
 }
 ```
@@ -72,10 +72,11 @@ data包括字段为：
 - sigBE: 签名，大端字节序，hex编码
 - padding: 签名的padding，hex编码
 - payload: 签名的内容，hex编码
+- script: 脚本原始内容，hex编码
 
 其中payload字节内容为：
 
-    txid, index, value, script
+    txid, index, value, hash160(script)
 
 txid在payload中为原始字节序, index是小端4字节，value是小端8字节。
 
@@ -88,9 +89,10 @@ txid在payload中为原始字节序, index是小端4字节，value是小端8字�
     "txId": "4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b",
     "index": 0,
     "byTxId": "",
-    "sigBE": "196a308c5393bd4b2aed57b4aa8891f1628b98bdf05776b8f79519c09f7515a564566421243aafbb6993c2088e87d73f1debf0acf58362d9f9b63289e548c8827a6a4fd1eb20d5bed80ff2e28dac42cd18865806d3c5bdd31ea515c7c16de89f43f7fe388fce885c0a1da9a3156d116c86afe08f2a4a7a74fcc66b280a8913a4",
-    "padding": "0100",
-    "payload": "3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a0000000000f2052a010000004104678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5fac"
+    "sigBE": "07ffec4dddc4a881ccd12d7075946304cd5544525c02b366f643363267f8916d9b4f57374b6aa9867c3f7bacb8ecf528ef056b14e7fb2b2cc9e45bac10a8ab15d07dff74c6e8830977bda7c421b5a53c545d3aff1ac63757d2aed201148113e6fd6d6676ebc264f63c46e58528c708504dfc86dafbccbbaa57b3c0a89f1871f1",
+    "padding": "0800",
+    "payload": "3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a0000000000f2052a010000008424e7542477ef1a76cbab88d4b177d2fb5a96c1",
+    "script": "4104678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5fac"
   }
 }
 ```
@@ -133,10 +135,11 @@ data包括字段为：
 - sigBE: 签名，大端字节序，hex编码
 - padding: 签名的padding，hex编码
 - payload: 签名的内容，hex编码
+- script: 脚本原始内容，hex编码
 
 其中payload字节内容为：
 
-    txid, index, value, script, bytxid
+    txid, index, value, hash160(script), bytxid
 
 txid在payload中为原始字节序, index是小端4字节，value是小端8字节。
 
@@ -149,9 +152,10 @@ txid在payload中为原始字节序, index是小端4字节，value是小端8字�
     "txId": "0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9",
     "index": 0,
     "byTxId": "f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16",
-    "sigBE": "215ea6362e87203e8eec7ce28724185d4f5436245e9796b2b843368d8d9f0f98f75e5f402e87469584ac3a24b7fdb1eae937db9bfbd96692fd721479647506fee1c69141dd8c6793d27898416cb5c5b23b658780fc55cf56f75c3e196849034397b9de986301b4dc10880bc5cae54576dec45a92a95ffd5dd95c333325449d09",
+    "sigBE": "04e71de4aab8b5065e7f9ab0c6b503c26d917e2d869142c0bada2eabd5977e6dcc7a337a9f030bec405d6aec4efac3a4aea217c78af31a1f20966c7b60cdde30883638067d69655d78250faaa937f3b67bbfa0f304dee8564505ef0e4a51f8cab1ad767f797f8ea065110c148495198ce7aef67f7f06d04e31a30fc7a530abbf",
     "padding": "0100",
-    "payload": "c997a5e56e104102fa209c6a852dd90660a20b2d9c352423edce25857fcd37040000000000f2052a01000000410411db93e1dcdb8a016b49840f8c53bc1eb68a382e97b1482ecad7b148a6909a5cb2e0eaddfb84ccf9744464f82e160bfa9b8b64f9d4c03f999b8643f656b412a3ac169e1e83e930853391bc6f35f605c6754cfead57cf8387639d3b4096c54f18f4"
+    "payload": "c997a5e56e104102fa209c6a852dd90660a20b2d9c352423edce25857fcd37040000000000f2052a01000000e01507f88b6dcc026c7062029c03adb11553de10169e1e83e930853391bc6f35f605c6754cfead57cf8387639d3b4096c54f18f4",
+    "script": "410411db93e1dcdb8a016b49840f8c53bc1eb68a382e97b1482ecad7b148a6909a5cb2e0eaddfb84ccf9744464f82e160bfa9b8b64f9d4c03f999b8643f656b412a3ac"
   }
 }
 ```

@@ -14,10 +14,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func txValidator(ctx *gin.Context) (code int, err error) {
-	return
-}
-
 // SignUtxoSpendBy
 func SignUtxoSpendBy(ctx *gin.Context) {
 	log.Printf("SignUtxoSpendBy enter")
@@ -68,7 +64,7 @@ func SignUtxoSpendBy(ctx *gin.Context) {
 		return
 	}
 
-	txObjHash := blkparser.GetShaString(txRaw)
+	txObjHash := blkparser.GetHash256(txRaw)
 	if !bytes.Equal(txObjHash, txId) {
 		log.Printf("txId(%s) not match hash(txBody)(%s)", hex.EncodeToString(txId), hex.EncodeToString(txObjHash))
 		ctx.JSON(http.StatusOK, model.Response{Code: -1, Msg: "txId not match txBody"})
@@ -95,7 +91,7 @@ func SignUtxoSpendBy(ctx *gin.Context) {
 		return
 	}
 
-	byTxObjHash := blkparser.GetShaString(byTxRaw)
+	byTxObjHash := blkparser.GetHash256(byTxRaw)
 	if !bytes.Equal(byTxObjHash, byTxId) {
 		log.Printf("byTxId(%s) not match hash(txBody)(%s)", hex.EncodeToString(byTxId), hex.EncodeToString(byTxObjHash))
 		ctx.JSON(http.StatusOK, model.Response{Code: -1, Msg: "byTxId not match byTxBody"})
@@ -132,7 +128,7 @@ func SignUtxoSpendBy(ctx *gin.Context) {
 		txId,
 		txIndexRaw,
 		txObj.TxOuts[txIndex].ValueRaw,
-		txObj.TxOuts[txIndex].Pkscript,
+		blkparser.GetHash160(txObj.TxOuts[txIndex].Pkscript),
 		byTxId,
 	}, []byte{})
 
@@ -147,6 +143,7 @@ func SignUtxoSpendBy(ctx *gin.Context) {
 			Sig:     hex.EncodeToString(sig),
 			Padding: hex.EncodeToString(padding),
 			Payload: hex.EncodeToString(payloadMsg),
+			Script:  hex.EncodeToString(txObj.TxOuts[txIndex].Pkscript),
 		}})
 
 }
