@@ -11,7 +11,8 @@ type TxResponse struct {
 	TxId    string `json:"txId"`
 	Index   int    `json:"index"`
 	ByTxId  string `json:"byTxId"`
-	Sig     string `json:"sigBE"`
+	SigBE   string `json:"sigBE"`
+	SigLE   string `json:"sigLE"`
 	Padding string `json:"padding"`
 	Payload string `json:"payload"`
 	Script  string `json:"script"`

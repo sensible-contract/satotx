@@ -82,7 +82,11 @@ func SignUtxo(ctx *gin.Context) {
 	}, []byte{})
 
 	sig, padding := rb.Sign(payloadMsg)
-
+	if len(sig) == 0 {
+		log.Printf("padding over 256 times.")
+		ctx.JSON(http.StatusOK, model.Response{Code: -1, Msg: "padding over 256 times"})
+		return
+	}
 	ctx.JSON(http.StatusOK, model.Response{
 		Code: 0,
 		Msg:  "ok",
@@ -90,7 +94,8 @@ func SignUtxo(ctx *gin.Context) {
 			TxId:    txIdHex,
 			Index:   txIndex,
 			ByTxId:  "",
-			Sig:     hex.EncodeToString(sig),
+			SigBE:   hex.EncodeToString(sig),
+			SigLE:   hex.EncodeToString(utils.ReverseBytes(sig)),
 			Padding: hex.EncodeToString(padding),
 			Payload: hex.EncodeToString(payloadMsg),
 			Script:  hex.EncodeToString(txObj.TxOuts[txIndex].Pkscript),

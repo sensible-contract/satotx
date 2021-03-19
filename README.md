@@ -15,12 +15,14 @@
 
 1. 普通web API运行方式，
 ```
-$ go build -v main.go     # 编译
-$ PINT=313242 QINT=328471 LISTEN=:8000 ./satotx  # 运行
+$ go build -v -o satotx main.go    # 编译
+$ export PINT=4500086422777284614649185698080302158559082854283623085071286437702609134945108376498504441947235804413771973268603081955797477873992855707579719874199
+$ export QINT=644767523354888926443294407216811496298090339710859618436800524594486048803150814665399137334438348620190687521269075965377327693448171249204212488583
+$ LISTEN=:8000 ./satotx  # 运行
 ```
 2. 使用aws lambda方式部署
 ```
-$ GOOS=linux GOARCH=amd64 go build -v main_aws.go    # 编译
+$ GOOS=linux GOARCH=amd64 go build -v -o satotx main_aws.go    # 编译
 ```
 
 ### 0. Welcome
@@ -88,6 +90,7 @@ data包括字段为：
 - index: 同输入参数
 - byTxId: 空
 - sigBE: 签名，大端字节序，hex编码
+- sigLE: 签名，小端字节序，hex编码
 - padding: 签名的padding，hex编码
 - payload: 签名的内容，hex编码
 - script: 脚本原始内容，hex编码
@@ -108,6 +111,7 @@ txid在payload中为原始字节序, index是小端4字节，value是小端8字�
     "index": 0,
     "byTxId": "",
     "sigBE": "07ffec4dddc4a881ccd12d7075946304cd5544525c02b366f643363267f8916d9b4f57374b6aa9867c3f7bacb8ecf528ef056b14e7fb2b2cc9e45bac10a8ab15d07dff74c6e8830977bda7c421b5a53c545d3aff1ac63757d2aed201148113e6fd6d6676ebc264f63c46e58528c708504dfc86dafbccbbaa57b3c0a89f1871f1",
+    "sigLE": "f171189fa8c0b357aabbccfbda86fc4d5008c72885e5463cf664c2eb76666dfde613811401d2aed25737c61aff3a5d543ca5b521c4a7bd770983e8c674ff7dd015aba810ac5be4c92c2bfbe7146b05ef28f5ecb8ac7b3f7c86a96a4b37574f9b6d91f867323643f666b3025c524455cd04639475702dd1cc81a8c4dd4decff07",
     "padding": "0800",
     "payload": "3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a0000000000f2052a010000008424e7542477ef1a76cbab88d4b177d2fb5a96c1",
     "script": "4104678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5fac"
@@ -151,6 +155,7 @@ data包括字段为：
 - index: 同输入参数
 - byTxId: 同输入参数
 - sigBE: 签名，大端字节序，hex编码
+- sigLE: 签名，小端字节序，hex编码
 - padding: 签名的padding，hex编码
 - payload: 签名的内容，hex编码
 - script: 脚本原始内容，hex编码
@@ -171,6 +176,7 @@ txid在payload中为原始字节序, index是小端4字节，value是小端8字�
     "index": 0,
     "byTxId": "f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16",
     "sigBE": "04e71de4aab8b5065e7f9ab0c6b503c26d917e2d869142c0bada2eabd5977e6dcc7a337a9f030bec405d6aec4efac3a4aea217c78af31a1f20966c7b60cdde30883638067d69655d78250faaa937f3b67bbfa0f304dee8564505ef0e4a51f8cab1ad767f797f8ea065110c148495198ce7aef67f7f06d04e31a30fc7a530abbf",
+    "sigLE": "bfab30a5c70fa3314ed0067f7ff6aee78c199584140c1165a08e7f797f76adb1caf8514a0eef054556e8de04f3a0bf7bb6f337a9aa0f25785d65697d0638368830decd607b6c96201f1af38ac717a2aea4c3fa4eec6a5d40ec0b039f7a337acc6d7e97d5ab2edabac04291862d7e916dc203b5c6b09a7f5e06b5b8aae41de704",
     "padding": "0100",
     "payload": "c997a5e56e104102fa209c6a852dd90660a20b2d9c352423edce25857fcd37040000000000f2052a01000000e01507f88b6dcc026c7062029c03adb11553de10169e1e83e930853391bc6f35f605c6754cfead57cf8387639d3b4096c54f18f4",
     "script": "410411db93e1dcdb8a016b49840f8c53bc1eb68a382e97b1482ecad7b148a6909a5cb2e0eaddfb84ccf9744464f82e160bfa9b8b64f9d4c03f999b8643f656b412a3ac"
