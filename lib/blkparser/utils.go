@@ -8,7 +8,7 @@ import (
 	"golang.org/x/crypto/ripemd160"
 )
 
-func DecodeVariableLengthInteger(raw []byte) (cnt uint, cnt_size uint) {
+func SafeDecodeVarIntForBlock(raw []byte) (cnt uint, cnt_size uint) {
 	if len(raw) < 1 {
 		return 0, 0
 	}
