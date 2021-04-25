@@ -24,6 +24,7 @@ func main() {
 	router.GET("/", controller.Satotx)
 	router.POST("/utxo/:txid/:index", controller.SignUtxo)
 	router.POST("/utxo-spend-by/:txid/:index/:byTxid", controller.SignUtxoSpendBy)
+	router.POST("/utxo-spend-by-utxo/:txid/:index/:byTxid/:byTxindex", controller.SignUtxoSpendByUtxo)
 
 	log.Printf("LISTEN: %s", listen_address)
 	svr := &http.Server{

@@ -35,6 +35,13 @@ func SafeDecodeVarIntForBlock(raw []byte) (cnt uint, cnt_size uint) {
 	return uint(binary.LittleEndian.Uint64(raw[1:9])), 9
 }
 
+func GetSHA256(data []byte) (hash []byte) {
+	sha := sha256.New()
+	sha.Write(data[:])
+	hash = sha.Sum(nil)
+	return
+}
+
 func GetHash256(data []byte) (hash []byte) {
 	sha := sha256.New()
 	sha.Write(data[:])

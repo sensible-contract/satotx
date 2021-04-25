@@ -10,12 +10,31 @@ type TxRequest struct {
 type TxResponse struct {
 	TxId    string `json:"txId"`
 	Index   int    `json:"index"`
-	ByTxId  string `json:"byTxId"`
 	SigBE   string `json:"sigBE"`
 	SigLE   string `json:"sigLE"`
 	Padding string `json:"padding"`
 	Payload string `json:"payload"`
 	Script  string `json:"script"`
+
+	ByTxId string `json:"byTxId"`
+}
+
+type TxTwoSigResponse struct {
+	TxId    string `json:"txId"`
+	Index   int    `json:"index"`
+	SigBE   string `json:"sigBE"`
+	SigLE   string `json:"sigLE"`
+	Padding string `json:"padding"`
+	Payload string `json:"payload"`
+	Script  string `json:"script"`
+
+	ByTxId      string `json:"byTxId"`
+	ByTxIndex   int    `json:"byTxIndex"`
+	ByTxSigBE   string `json:"byTxSigBE"`
+	ByTxSigLE   string `json:"byTxSigLE"`
+	ByTxPadding string `json:"byTxPadding"`
+	ByTxPayload string `json:"byTxPayload"`
+	ByTxScript  string `json:"byTxScript"`
 }
 
 type Response struct {
