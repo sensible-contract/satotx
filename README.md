@@ -201,8 +201,8 @@ Body中需要的json参数为：
 #### Request
 - Method: **POST**
 - Headers：`Content-Type: application/json`
-- URL:  ```/utxo-spend-by/{txid}/{index}/{byTxid}/{byTxindex}```
-    - 示例:  ```/utxo-spend-by/0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9/0/f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16/0```
+- URL:  ```/utxo-spend-by-utxo/{txid}/{index}/{byTxid}/{byTxindex}```
+    - 示例:  ```/utxo-spend-by-utxo/0437cd7f8525ceed2324359c2d0ba26006d92d856a9c20fa0241106ee5a597c9/0/f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16/0```
 - Body:
 ```
 {
