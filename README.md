@@ -23,6 +23,13 @@ $ LISTEN=:8000 ./satotx  # 运行
 2. 使用aws lambda方式部署
 ```
 $ GOOS=linux GOARCH=amd64 go build -v -o satotx main_aws.go    # 编译
+$ zip main_aws.zip satotx # 打包
+```
+
+3. 使用腾讯云function方式部署
+```
+$ GOOS=linux GOARCH=amd64 go build -v -o satotx main_scf.go    # 编译
+$ zip main_scf.zip satotx # 打包
 ```
 
 ### 0. Welcome
