@@ -6,7 +6,7 @@ COPY . .
 
 # Build binary output
 RUN go mod download && \
-    GOOS=${GO_OS} GOARCH=${GO_ARCH}  go build -v -o satotx main.go
+    GOOS=${GO_OS} GOARCH=${GO_ARCH} CGO_ENABLED=0 go build -v -o satotx main.go
 
 FROM alpine:latest
 COPY --from=build /build/satotx satotx
