@@ -10,6 +10,6 @@ RUN go mod download && \
 
 FROM alpine:latest
 COPY --from=build /build/satotx satotx
-ENV LISTEN 8000
+ENV LISTEN 0.0.0.0:8000
 EXPOSE 8000
 CMD ["./satotx"]
