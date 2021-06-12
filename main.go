@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,6 +21,7 @@ var (
 
 func main() {
 	router := gin.Default()
+	router.Use(gzip.Gzip(gzip.DefaultCompression, gzip.WithDecompressFn(gzip.DefaultDecompressHandle)))
 
 	router.GET("/", controller.Satotx)
 	router.POST("/utxo/:txid/:index", controller.SignUtxo)
