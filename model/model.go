@@ -2,6 +2,8 @@ package model
 
 import "encoding/json"
 
+const VERSION = "v1.0"
+
 type TxRequest struct {
 	TxHex   string `json:"txHex"`
 	ByTxHex string `json:"byTxHex"`
@@ -14,7 +16,6 @@ type TxResponse struct {
 	SigLE   string `json:"sigLE"`
 	Padding string `json:"padding"`
 	Payload string `json:"payload"`
-	Script  string `json:"script"`
 
 	ByTxId string `json:"byTxId"`
 }
@@ -26,7 +27,6 @@ type TxTwoSigResponse struct {
 	SigLE   string `json:"sigLE"`
 	Padding string `json:"padding"`
 	Payload string `json:"payload"`
-	Script  string `json:"script"`
 
 	ByTxId      string `json:"byTxId"`
 	ByTxIndex   int    `json:"byTxIndex"`
@@ -34,7 +34,6 @@ type TxTwoSigResponse struct {
 	ByTxSigLE   string `json:"byTxSigLE"`
 	ByTxPadding string `json:"byTxPadding"`
 	ByTxPayload string `json:"byTxPayload"`
-	ByTxScript  string `json:"byTxScript"`
 }
 
 type Response struct {
@@ -53,4 +52,5 @@ type Welcome struct {
 	Contact string `json:"contact"`
 	Job     string `json:"job"`
 	Github  string `json:"github"`
+	Version string `json:"version"`
 }
