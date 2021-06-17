@@ -20,6 +20,7 @@ func Satotx(ctx *gin.Context) {
 			Contact: "",
 			Job:     "",
 			Github:  "https://github.com/sensible-contract",
+			Version: model.VERSION,
 		},
 	})
 }

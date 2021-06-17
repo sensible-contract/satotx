@@ -181,7 +181,6 @@ func SignUtxoSpendByUtxo(ctx *gin.Context) {
 			SigLE:   hex.EncodeToString(utils.ReverseBytes(sig)),
 			Padding: hex.EncodeToString(padding),
 			Payload: hex.EncodeToString(payloadMsg),
-			Script:  hex.EncodeToString(txObj.TxOuts[txIndex].Pkscript),
 
 			ByTxId:      byTxIdHex,
 			ByTxIndex:   byTxIndex,
@@ -189,6 +188,5 @@ func SignUtxoSpendByUtxo(ctx *gin.Context) {
 			ByTxSigLE:   hex.EncodeToString(utils.ReverseBytes(bySig)),
 			ByTxPadding: hex.EncodeToString(byPadding),
 			ByTxPayload: hex.EncodeToString(byPayloadMsg),
-			ByTxScript:  hex.EncodeToString(byTxObj.TxOuts[byTxIndex].Pkscript),
 		}})
 }
