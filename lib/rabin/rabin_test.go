@@ -15,6 +15,12 @@ func init() {
 	rb.Init(pString, qString)
 }
 
+func TestHash(t *testing.T) {
+	msg := []byte("hello")
+	value := hash(msg)
+	t.Log("hash:", hex.EncodeToString(value))
+}
+
 func TestSign(t *testing.T) {
 	msg := []byte("hello")
 	sig, padding := rb.Sign(msg)

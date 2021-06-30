@@ -12,6 +12,8 @@ import (
 	"math/big"
 )
 
+const PUBKEY_BITS = 3072
+
 type Rabin struct {
 	P *big.Int
 	Q *big.Int
@@ -107,19 +109,14 @@ func (r *Rabin) Sign(msg []byte) (signature, padding []byte) {
 func hash(data []byte) (hashRev []byte) {
 	sha := sha256.New()
 	sha.Write(data[:])
-	tmp := sha.Sum(nil)
+	hash := sha.Sum(nil)
 
-	sha.Reset()
-	sha.Write(tmp[:16])
-	hashl := sha.Sum(nil)
-
-	sha.Reset()
-	sha.Write(tmp[16:])
-	hashr := sha.Sum(nil)
-
-	hash := []byte{}
-	hash = append(hash, hashl...)
-	hash = append(hash, hashr...)
+	for i := 0; i < (PUBKEY_BITS/256 - 1); i++ {
+		sha.Reset()
+		sha.Write(hash[:])
+		tmp := sha.Sum(nil)
+		hash = append(hash, tmp...)
+	}
 
 	// little endian
 	for _, b := range hash {

@@ -2,7 +2,7 @@ package model
 
 import "encoding/json"
 
-const VERSION = "v1.0"
+const VERSION = "v2.0"
 
 type TxRequest struct {
 	TxHex   string `json:"txHex"`
